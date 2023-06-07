@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flux RSS TechCrunch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .article-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .article-list-item {
+      margin-bottom: 10px;
+    }
+
+    .article-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .article-link {
+      color: #000;
+      text-decoration: none;
+    }
+
+    .article-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Flux RSS TechCrunch</h1>
+  <ul id="article-list" class="article-list"></ul>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var rssUrl = "https://techcrunch.com/feed/";
+
+      $.ajax(rssUrl, {
+        accepts: {
+          xml: "application/rss+xml"
+        },
+        dataType: "xml",
+        success: function(data) {
+          $(data)
+            .find("item")
+            .each(function() {
+              var title = $(this).find("title").text();
+              var link = $(this).find("link").text();
+
+              var listItem = "<li class='article-list-item'>";
+              listItem += "<span class='article-title'>" + title + "</span> - ";
+              listItem += "<a class='article-link' href='" + link + "'>Lire l'article</a>";
+              listItem += "</li>";
+
+              $("#article-list").append(listItem);
+            });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
