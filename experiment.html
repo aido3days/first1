@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between; /* Ajustement pour l'espace entre les éléments */
+      background-color: black;
+      color: white; /* Couleur du texte */
+      position: relative; /* Position relative pour les éléments en bas */
+    }
+    
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      margin-top: 20px; /* Marge supérieure pour le titre */
+    }
+
+    h2 {
+      font-size: 20px;
+      text-align: center;
+      width:100%;
+      margin-top: 20px; /* Marge supérieure pour le titre */
+    }
+
+    .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 20px;
+      margin-bottom:40px;
+    }
+    
+    .box {
+      background-color: white;
+      color: black;
+      padding: 10px;
+      margin: 10px;
+      text-align: center;
+      flex-basis: 30%;
+      max-width: 300px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      cursor: pointer; /* Ajout d'un curseur pointeur au survol */
+      position: relative; /* Ajoutez une position relative pour que la position du sigle soit basée sur la boîte */
+    }
+    
+    .checkmark {
+        position: absolute; /* Position absolue pour placer le sigle par rapport à la boîte */
+        bottom: 5px; /* Ajustez cette valeur pour le positionnement vertical */
+        left: 5px; /* Ajustez cette valeur pour le positionnement horizontal */
+        font-family: "Font Awesome"; /* Assurez-vous d'inclure la police d'icônes appropriée */
+        font-size: 18px; /* Ajustez la taille de la police du sigle */
+        content: "\f00c"; /* Code Unicode du sigle de la coche (vérifiez la documentation de la police d'icônes utilisée) */
+    }
+
+    @media only screen and (max-width: 600px) {
+      .box {
+        flex-basis: 100%;
+      }
+    }
+    
+    .version {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      color: gray;
+      font-size: 14px;
+      background-color: black;
+      padding: 5px 10px;
+    }
+    
+    .created-by {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      color: gray;
+      font-size: 14px;
+      background-color: black;
+      padding: 5px 10px;
+    }
+
+    .popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      line-height:1.5;
+      transform: translate(-50%, -50%);
+      background-color: white;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond transparente */
+        display: none; /* Masqué par défaut */
+    }
+
+    /* Ajoutez cette règle pour afficher le filtre lorsque le popup est ouvert */
+    .popup-open .overlay {
+        display: block;
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/13aa082e0f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>Hello aido3days!</h1>
+  
+  <div class="box-container">
+    <h2>Intelligence Artificielle & Machine Learning</h2>
+    <div class="box" id="ia1-box">
+      <p>IA1. Comprenez les concepts de base</p>
+      <span class="fa-solid fa-cog fa-spin" style="color: #5186f0;"></span>
+    </div>
+    <div class="box" id="ia2-box">
+      <p>IA2. Apprenez les langages de programmation</p>
+    </div>
+    <div class="box" id="ia3-box">
+      <p>IA3. Explorez les bibliothèques et les frameworks</p>
+    </div>
+    <div class="box" id="ia4-box">
+      <p>IA4. Suivez des cours et des tutoriels en ligne</p>
+    </div>
+    <div class="box" id="ia5-box">
+      <p>IA5. Participez à des compétitions de science des données</p>
+    </div>
+    <div class="box" id="ia6-box">
+      <p>IA6. Expérimentez avec des ensembles de données publics</p>
+    </div>
+    <div class="box" id="ia7-box">
+      <p>IA7. Lisez des articles et des recherches</p>
+    </div>
+    <div class="box" id="ia8-box">
+      <p>IA8. Créez vos propres projets d'IA</p>
+    </div>
+  </div>
+
+  <div class="box-container">
+    <h2>DevOps</h2>
+    <div class="box" id="d1-box">
+      <p>D1. Apprenez les concepts fondamentaux</p>
+      <span class="fa-solid fa-check" style="color: #2cce65;"></span>
+    </div>
+    <div class="box" id="d2-box">
+      <p>D2. Explorez les outils DevOps</p>
+    </div>
+    <div class="box" id="d3-box">
+      <p>D3. Mettez en pratique avec des projets personnels</p>
+    </div>
+    <div class="box" id="d4-box">
+      <p>D4. Rejoignez des communautés en ligne</p>
+    </div>
+    <div class="box" id="d5-box">
+      <p>D5. Suivez des tutoriels et des ressources en ligne</p>
+    </div>
+    <div class="box" id="d6-box">
+      <p>D6. Participez à des formations ou des ateliers</p>
+    </div>
+    <div class="box" id="d7-box">
+      <p>D7. Expérimentez avec des projets d'équipe</p>
+    </div>
+    <div class="box" id="d8-box">
+      <p>D8. Restez à jour avec les tendances et les bonnes pratiques</p>
+    </div>
+  </div>
+  
+  <div class="version">
+    Version 230608-4
+  </div>
+  
+  <div class="created-by">
+    Created by aido3days &amp; ChatGPT
+  </div>
+
+    <div class="overlay"></div>
+  <div id="popup-container"></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#ia1-box').click(function() {
+        showPopup("IA1. Comprenez les concepts de base : Familiarisez-vous avec les concepts fondamentaux de l'IA et du ML, tels que l'apprentissage supervisé, l'apprentissage non supervisé, les réseaux neuronaux, les algorithmes de classification et de régression, etc. Cela vous donnera une base solide pour explorer davantage ces domaines.");
+      });
+      
+      $('#d1-box').click(function() {
+        showPopup("D1. Apprenez les concepts fondamentaux : Familiarisez-vous avec les principes de base de DevOps tels que l'intégration continue (CI), le déploiement continu (CD), l'automatisation des tests, la gestion des configurations et la collaboration entre les équipes de développement et d'exploitation.");
+      });
+    });
+
+    function showPopup(message) {
+      const popup = $('<div class="popup"></div>').text(message);
+
+        $('#popup-container').append(popup);
+        $('body').addClass('popup-open'); // Ajoutez la classe "popup-open" à la div principale
+
+        // Ajouter un événement de clic sur le popup pour le fermer
+        popup.click(function() {
+        $(this).remove();
+        $('body').removeClass('popup-open'); // Retirez la classe "popup-open" de la div principale
+        });
+    }
+  </script>
+</body>
+</html>
