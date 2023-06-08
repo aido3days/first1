@@ -1,60 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIDO3days</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            font-family: Arial, sans-serif;
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+    }
+    
+    .hello {
+      color: white;
+      font-size: 24px;
+      text-align: center;
+    }
+    
+    .version {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      color: gray;
+      font-size: 14px;
+    }
+    
+    .created-by {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: gray;
+      font-size: 14px;
+    }
+    
+    .articles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    
+    .article-box {
+      border: 2px solid white;
+      border-radius: 10px;
+      margin: 0 10px 20px;
+      padding: 10px;
+      flex-basis: calc(33.33% - 20px);
+      box-sizing: border-box;
+    }
+    
+    .article-box a {
+      display: block;
+      width: 100%;
+      height: 100%;
+      color: white;
+      text-decoration: none;
+    }
+    
+    @media (max-width: 768px) {
+      .article-box {
+        flex-basis: calc(100% - 20px);
+      }
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: 'https://api.rss2json.com/v1/api.json',
+        method: 'GET',
+        data: {
+          rss_url: 'https://techcrunch.com/feed/'
+        },
+        dataType: 'json',
+        success: function(response) {
+          var items = response.items;
+          var articlesContainer = $('#articles-container');
+          
+          for (var i = 0; i < 3 && i < items.length; i++) {
+            var title = items[i].title;
+            var link = items[i].link;
+            
+            var articleBox = $('<div>')
+              .addClass('article-box')
+              .appendTo(articlesContainer);
+              
+            var articleLink = $('<a>')
+              .attr('href', link)
+              .appendTo(articleBox);
+              
+            var articleTitle = $('<h3>')
+              .text(title)
+              .appendTo(articleLink);
+          }
         }
-        
-        header {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background-color: #f5f5f5;
-        }
-        
-        #logo {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-        }
-        
-        main {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        footer {
-            width: 100%;
-            padding: 10px;
-            background-color: #f5f5f5;
-            text-align: center;
-        }
-    </style>
+      });
+    });
+  </script>
 </head>
 <body>
-    <header>
-        <img id="logo" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
-    </header>
-    
-    <main>
-        <h1>AIDO3days</h1>
-    </main>
-    
-    <footer>
-        <p>Copyright 2023</p>
-    </footer>
+  <div class="hello">
+    Hello aido3days!
+  </div>
+  
+  <div id="articles-container" class="articles"></div>
+  
+  <div class="version">
+    Version 230608-7
+  </div>
+  
+  <div class="created-by">
+    Created by aido3days &amp; ChatGPT
+  </div>
 </body>
+</html>
